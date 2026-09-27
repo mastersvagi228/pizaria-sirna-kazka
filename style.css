@@ -152,12 +152,14 @@ a:visited {
 }
 
 .drinksmenu {
+    margin-top: 15px;
     text-align: center;
     display: flex;
     justify-content: space-around;
 }
 
 .drinksdiv {
+    margin-top: 15px;
     border: 7px solid #FFF9D6;
     border-radius: 10px;
     display: flex;
@@ -327,4 +329,35 @@ li {
     height: 600px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.koshik {
+    position: fixed;
+}
+
+.koshik2 {
+    position: fixed;
+    top:20px
+}
+
+.soda {
+    position: fixed;
+    top:85px
+}
+
+.snacks {
+    position: fixed;
+    top:150px
+}
+
+.back {
+    position: fixed;
+    top:215px
+}
+
+.buskut {
+    width:50px;
+    height:50px;
+    border:5px solid #FFF9D6;
+    border-radius:10px;
 }
