@@ -1,0 +1,100 @@
+body {
+    font-family: sans-serif;
+    background-color: #FFD800;
+}
+
+h1 {
+    color: #FFF9D6;
+    font-size: 60px;
+    text-align: center;
+}
+
+.fri {
+    width: 350px;
+    height: 300px;
+}
+
+.PIDO {
+    margin-top: 20px;
+    font-size: 50px;
+    color: #FFD800;
+    margin-left: 70px;
+}
+
+.pizzadiv {
+    border: 7px solid #FFF9D6;
+    background-color: #FFF9D6;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+}
+
+.pizzadivzirobas {
+    display: flex;
+}
+
+.pizzadivmegaladon {
+    display: flex;
+}
+
+.pizzadivkaban {
+    display: flex;
+}
+
+.pizzadivkozak {
+    display: flex;
+}
+
+.pizzadivmeat {
+    display: flex;
+}
+
+.pizzadivitaliano {
+    display: flex;
+}
+
+.pizzadivamericano {
+    display: flex;
+}
+
+.pizzadivfish {
+    display: flex;
+}
+
+.pizzadivfri {
+    display: flex;
+}
+
+.pizzadivnugets {
+    display: flex;
+}
+
+.pizzadivCS {
+    display: flex;
+}
+
+.pizzadivCB {
+    display: flex;
+}
+
+.pizzadivfri2 {
+    display: flex;
+}
+
+.pizzadivOS {
+    display: flex;
+}
+
+.pizzadivpepsi {
+    display: flex;
+}
+
+.pizzadivfanta {
+    display: flex;
+}
+
+.pizzadivcola {
+    display: flex;
+}

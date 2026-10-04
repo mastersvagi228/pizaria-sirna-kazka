@@ -342,24 +342,33 @@ li {
 
 .soda {
     position: fixed;
-    top:85px
+    top:90px
 }
 
 .snacks {
     position: fixed;
-    top:150px
+    top:160px
 }
 
 .back {
     position: fixed;
-    top:215px
+    top:230px
 }
 
+
 .buskut {
+    transition: 0.15s;
     width:50px;
     height:50px;
     border:5px solid #FFF9D6;
     border-radius:10px;
+}
+
+.buskut:hover {
+    width:55px;
+    height:55px;
+    border:5.5px solid #FFF9D6;
+    border-radius:11.5px;
 }
 
 @media (min-width: 0px) and (max-width: 580px) {
