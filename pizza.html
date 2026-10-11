@@ -2,6 +2,7 @@
     <body>
        <head>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="StylesForBusket.css">
         <title>піцерія сирна казка</title>
         </head>
 
@@ -36,7 +37,7 @@
         <li><b>соус томатний</b></li>
         </ul>
         <p><b>ціна:309грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivzirobas2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -53,7 +54,7 @@
         <li><b>зелень</b></li>
         </ul>
         <p><b>ціна:289грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivmegaladon2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -70,7 +71,7 @@
         <li><b>соус томатний</b></li>
         </ul>
         <p><b>ціна:369грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivmeat2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -88,7 +89,7 @@
         <li><b>шинка</b></li>
         </ul>
         <p><b>ціна:379грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivkozak2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -105,7 +106,7 @@
         <li><b>перець чилі</b></li>
         </ul>
         <p><b>ціна:459грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivkaban2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -122,7 +123,7 @@
         <li><b>соус вершковий</b></li>
         </ul>
         <p><b>ціна:419грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivfish2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -139,7 +140,7 @@
         <li><b>італійській соус</b></li>
         </ul>
         <p><b>ціна:249грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivitaliano2" href="busket.html"><b>замовити</b></a>
         </div>
         </div>
 
@@ -156,11 +157,77 @@
         <li><b>кукурудза</b></li>
         </ul>
         <p><b>ціна:349грн</b></p>
-        <a class="NNNN" href="lox.html"><b>замовити</b></a>
+        <a class="NNNN pizzadivamericano2" href="busket.html"><b>замовити</b></a>
+        </div>
         </div>
         </div>
 
-        </div>
+       <script>
+    // Функція для застосування збережених стилів для ВСІХ активних класів
+    function applyAllSavedStyles() {
+        // Отримуємо масив збережених других класів із localStorage (якщо нічого немає — порожній масив)
+        let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+
+        savedClasses.forEach(secondClass => {
+            let baseClass = secondClass;
+            if (baseClass.endsWith('2')) {
+                baseClass = baseClass.slice(0, -1);
+            }
+
+            // Ховаємо елементи з другим класом
+            document.querySelectorAll('.' + secondClass).forEach(el => {
+                el.style.setProperty('display', 'none', 'important');
+            });
+
+            // Показуємо елементи з базовим класом
+            document.querySelectorAll('.' + baseClass).forEach(el => {
+                el.style.setProperty('display', 'flex', 'important');
+            });
+        });
+    }
+
+    // ЗАСТОСУВАННЯ ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
+    (function() {
+        window.addEventListener('DOMContentLoaded', applyAllSavedStyles);
+        // Дублюємо на випадок, якщо DOM вже завантажився
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            applyAllSavedStyles();
+        }
+    })();
+
+    // ОБРОБКА КЛІКІВ ПО ПОСИЛАННЯХ
+    document.addEventListener('click', function(event) {
+        const targetLink = event.target.closest('a');
+        if (!targetLink) return;
+
+        const classList = targetLink.classList;
+        if (classList.length < 2) return;
+
+        const secondClass = classList[1]; 
+
+        // Отримуємо поточний список збережених класів
+        let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+
+        // Додаємо новий клас до списку, якщо його там ще немає
+        if (!savedClasses.includes(secondClass)) {
+            savedClasses.push(secondClass);
+            localStorage.setItem('activeBuskerClasses', JSON.stringify(savedClasses));
+        }
+
+        // Застосовуємо стилі для всіх збережених елементів на поточній сторінці
+        applyAllSavedStyles();
+
+        // Перехід на іншу сторінку з затримкою для збереження в localStorage
+        const href = targetLink.getAttribute('href');
+        if (href && href !== '#' && !href.startsWith('javascript:')) {
+            event.preventDefault();
+            setTimeout(function() {
+                window.location.href = href;
+            }, 50);
+        }
+    });
+</script>
+
     </body>
 </html>>
 </html>
