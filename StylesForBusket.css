@@ -21,6 +21,22 @@ h1 {
     margin-left: 70px;
 }
 
+.buskut {
+    transition: 0.15s;
+    width:50px;
+    height:50px;
+    border:5px solid #FFF9D6;
+    border-radius:10px;
+    position: fixed;
+}
+
+.buskut:hover {
+    width:55px;
+    height:55px;
+    border:5.5px solid #FFF9D6;
+    border-radius:11.5px;
+}
+
 .pizzadiv {
     border: 7px solid #FFF9D6;
     background-color: #FFF9D6;
@@ -32,69 +48,139 @@ h1 {
 }
 
 .pizzadivzirobas {
-    display: flex;
+    display: none;
 }
 
 .pizzadivmegaladon {
-    display: flex;
+    display: none;
 }
 
 .pizzadivkaban {
-    display: flex;
+    display: none;
 }
 
 .pizzadivkozak {
-    display: flex;
+    display: none;
 }
 
 .pizzadivmeat {
-    display: flex;
+    display: none;
 }
 
 .pizzadivitaliano {
-    display: flex;
+    display: none;
 }
 
 .pizzadivamericano {
-    display: flex;
+    display: none;
 }
 
 .pizzadivfish {
-    display: flex;
+    display: none;
 }
 
 .pizzadivfri {
-    display: flex;
+    display: none;
 }
 
 .pizzadivnugets {
-    display: flex;
+    display: none;
 }
 
 .pizzadivCS {
-    display: flex;
+    display: none;
 }
 
 .pizzadivCB {
-    display: flex;
+    display: none;
 }
 
-.pizzadivfri2 {
-    display: flex;
+.pizzadivvilagge {
+    display: none;
 }
 
 .pizzadivOS {
-    display: flex;
+    display: none;
 }
 
 .pizzadivpepsi {
-    display: flex;
+    display: none;
 }
 
 .pizzadivfanta {
-    display: flex;
+    display: none;
 }
 
 .pizzadivcola {
-    display: flex;
+    display: none;
+}
+
+
+
+.pizzadivzirobas2 {
+    text-decoration: none;
+}
+
+.pizzadivmegaladon2 {
+    text-decoration: none;
+}
+
+.pizzadivkaban2 {
+    text-decoration: none;
+}
+
+.pizzadivkozak2 {
+    text-decoration: none;
+}
+
+.pizzadivmeat2 {
+    text-decoration: none;
+}
+
+.pizzadivitaliano2 {
+    text-decoration: none;
+}
+
+.pizzadivamericano2 {
+    text-decoration: none;
+}
+
+.pizzadivfish2 {
+    text-decoration: none;
+}
+
+.pizzadivfri2 {
+    text-decoration: none;
+}
+
+.pizzadivnugets2 {
+    text-decoration: none;
+}
+
+.pizzadivCS2 {
+    text-decoration: none;
+}
+
+.pizzadivCB2 {
+    text-decoration: none;
+}
+
+.pizzadivvilagge2 {
+    text-decoration: none;
+}
+
+.pizzadivOS2 {
+    text-decoration: none;
+}
+
+.pizzadivpepsi2 {
+    text-decoration: none;
+}
+
+.pizzadivfanta2 {
+    text-decoration: none;
+}
+
+.pizzadivcola2 {
+    text-decoration: none;
 }
