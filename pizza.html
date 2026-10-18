@@ -163,70 +163,138 @@
         </div>
 
        <script>
-    // Функція для застосування збережених стилів для ВСІХ активних класів
+    // Функція для визначення пари класів
+    function getClassPair(className) {
+        let secondClass = className;
+        let baseClass = className;
+
+        if (secondClass.endsWith('2')) {
+            baseClass = secondClass.slice(0, -1);
+        } else {
+            secondClass = baseClass + '2';
+        }
+
+        return { baseClass, secondClass };
+    }
+
+    // Застосування збережених стилів з localStorage
     function applyAllSavedStyles() {
-        // Отримуємо масив збережених других класів із localStorage (якщо нічого немає — порожній масив)
         let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
 
-        savedClasses.forEach(secondClass => {
-            let baseClass = secondClass;
-            if (baseClass.endsWith('2')) {
-                baseClass = baseClass.slice(0, -1);
-            }
+        // Спочатку скидаємо все у стандартний стан (базові сховані, з "2" - видимі)
+        // (Це опціонально, але гарантує порядок)
 
-            // Ховаємо елементи з другим класом
+        savedClasses.forEach(savedClass => {
+            const { baseClass, secondClass } = getClassPair(savedClass);
+
+            // Ховаємо елемент з цифрою 2 (бо він уже замовлений)
             document.querySelectorAll('.' + secondClass).forEach(el => {
                 el.style.setProperty('display', 'none', 'important');
             });
 
-            // Показуємо елементи з базовим класом
+            // ПОКАЗУЄМО базовий елемент у кошику
             document.querySelectorAll('.' + baseClass).forEach(el => {
                 el.style.setProperty('display', 'flex', 'important');
             });
         });
     }
 
-    // ЗАСТОСУВАННЯ ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
-    (function() {
-        window.addEventListener('DOMContentLoaded', applyAllSavedStyles);
-        // Дублюємо на випадок, якщо DOM вже завантажився
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            applyAllSavedStyles();
-        }
-    })();
+    // Запуск при завантаженні
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyAllSavedStyles);
+    } else {
+        applyAllSavedStyles();
+    }
 
-    // ОБРОБКА КЛІКІВ ПО ПОСИЛАННЯХ
+    // ГОЛОВНИЙ ОБРОБНИК КЛІКІВ
     document.addEventListener('click', function(event) {
+        
+        // 1. КЛІК НА СМИТНИК (.trash)
+        const trashElement = event.target.closest('.trash');
+        if (trashElement) {
+            event.preventDefault();
+
+            let parentDiv = trashElement.closest('div');
+            while (parentDiv) {
+                let hasPizzaClass = Array.from(parentDiv.classList).some(cls => cls.startsWith('pizzadiv') && cls !== 'pizzadiv' && !cls.endsWith('2'));
+                if (hasPizzaClass) break;
+                parentDiv = parentDiv.parentElement ? parentDiv.parentElement.closest('div') : null;
+            }
+
+            if (!parentDiv) {
+                parentDiv = trashElement.closest('div');
+            }
+
+            let baseClass = null;
+            if (parentDiv) {
+                for (let cls of parentDiv.classList) {
+                    if (cls.startsWith('pizzadiv') && cls !== 'pizzadiv' && !cls.endsWith('2')) {
+                        baseClass = cls;
+                        break;
+                    }
+                }
+            }
+
+            if (baseClass) {
+                const secondClass = baseClass + '2';
+
+                let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+                savedClasses = savedClasses.filter(c => c !== baseClass && c !== secondClass);
+                localStorage.setItem('activeBuskerClasses', JSON.stringify(savedClasses));
+
+                // Повертаємо у вихідний стан: базовий ховаємо, а з "2" показуємо
+                document.querySelectorAll('.' + baseClass).forEach(el => {
+                    el.style.setProperty('display', 'none', 'important');
+                });
+
+                document.querySelectorAll('.' + secondClass).forEach(el => {
+                    el.style.removeProperty('display'); // знімаємо жорсткий стиль
+                    el.style.setProperty('display', 'flex', 'important');
+                    el.style.setProperty('text-decoration', 'none', 'important');
+                });
+            }
+            return;
+        }
+
+        // 2. ПОСИЛАННЯ <a> (Кнопка замовлення)
         const targetLink = event.target.closest('a');
         if (!targetLink) return;
 
         const classList = targetLink.classList;
         if (classList.length < 2) return;
 
-        const secondClass = classList[1]; 
+        // Шукаємо клас, який закінчується на 2 або є базовим
+        let targetClass = null;
+        for (let cls of classList) {
+            if (cls.startsWith('pizzadiv')) {
+                targetClass = cls;
+                break;
+            }
+        }
 
-        // Отримуємо поточний список збережених класів
+        if (!targetClass) return;
+
+        const { baseClass, secondClass } = getClassPair(targetClass);
+
         let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
 
-        // Додаємо новий клас до списку, якщо його там ще немає
         if (!savedClasses.includes(secondClass)) {
             savedClasses.push(secondClass);
             localStorage.setItem('activeBuskerClasses', JSON.stringify(savedClasses));
         }
 
-        // Застосовуємо стилі для всіх збережених елементів на поточній сторінці
         applyAllSavedStyles();
 
-        // Перехід на іншу сторінку з затримкою для збереження в localStorage
         const href = targetLink.getAttribute('href');
         if (href && href !== '#' && !href.startsWith('javascript:')) {
             event.preventDefault();
             setTimeout(function() {
                 window.location.href = href;
-            }, 50);
+            }, 80); // трохи збільшили затримку, щоб localStorage стовідсотково встиг зберегти дані перед переходом
         }
     });
 </script>
+
 
     </body>
 </html>>

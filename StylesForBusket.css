@@ -3,6 +3,12 @@ body {
     background-color: #FFD800;
 }
 
+button {
+    text-decoration: none;
+    border: none;
+    background-color: #FFF9D6;
+}
+
 h1 {
     color: #FFF9D6;
     font-size: 60px;
@@ -46,6 +52,27 @@ h1 {
     margin-right: 100px;
     display: flex;
 }
+
+.PID1 {
+    margin-top: 130px;
+    margin-left: 200px;
+}
+
+.trash {
+    transition: 0.15s;
+    width:50px;
+    height:50px;
+    border:5px solid #FFF9D6;
+    border-radius:10px;
+}
+
+.trash:hover {
+    width:55px;
+    height:55px;
+    border:5.5px solid #FFF9D6;
+    border-radius:11.5px;
+}
+
 
 .pizzadivzirobas {
     display: none;

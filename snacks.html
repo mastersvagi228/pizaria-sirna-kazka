@@ -2,6 +2,7 @@
     <body>
        <head>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="StylesForBusket.css">
         <title>піцерія сирна казка</title>
         </head>
 
@@ -35,9 +36,9 @@
         </div>
         </div>
         <div class="MLdiv">
-        <a class="ML pizzadivfri2" href="lox.html"><b>350гр замовити</b></a>
-        <a class="ML pizzadivnugets2" href="lox.html"><b>350гр замовити</b></a>
-        <a class="ML pizzadivCB2" href="lox.html"><b>200гр замовити</b></a>
+        <a class="ML pizzadivfri2" href="busket.html"><b>350гр замовити</b></a>
+        <a class="ML pizzadivnugets2" href="busket.html"><b>350гр замовити</b></a>
+        <a class="ML pizzadivCB2" href="busket.html"><b>200гр замовити</b></a>
         </div>
 
         <div class="drinksmenu">
@@ -54,9 +55,127 @@
         </div>
         </div>
         <div class="MLdiv">
-        <a class="ML pizzadivCS2" href="lox.html"><b>250гр замовити</b></a>
-        <a class="ML pizzadivOS2" href="lox.html"><b>150гр замовити</b></a>
-        <a class="ML pizzadivvilagge2" href="lox.html"><b>300гр замовити</b></a>
+        <a class="ML pizzadivCS2" href="busket.html"><b>250гр замовити</b></a>
+        <a class="ML pizzadivOS2" href="busket.html"><b>150гр замовити</b></a>
+        <a class="ML pizzadivvilagge2" href="busket.html"><b>300гр замовити</b></a>
         </div>
+
+        <script>
+    // Функція для визначення пари класів
+    function getClassPair(className) {
+        let secondClass = className;
+        let baseClass = className;
+
+        if (secondClass.endsWith('2')) {
+            baseClass = secondClass.slice(0, -1);
+        } else {
+            secondClass = baseClass + '2';
+        }
+
+        return { baseClass, secondClass };
+    }
+
+    // Застосування збережених стилів з localStorage
+    function applyAllSavedStyles() {
+        let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+
+        savedClasses.forEach(savedClass => {
+            const { baseClass, secondClass } = getClassPair(savedClass);
+
+            document.querySelectorAll('.' + secondClass).forEach(el => {
+                el.style.setProperty('display', 'none', 'important');
+            });
+
+            document.querySelectorAll('.' + baseClass).forEach(el => {
+                el.style.setProperty('display', 'flex', 'important');
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyAllSavedStyles);
+    } else {
+        applyAllSavedStyles();
+    }
+
+    // ГОЛОВНИЙ ОБРОБНИК КЛІКІВ
+    document.addEventListener('click', function(event) {
+        
+        // 1. КЛІК НА СМИТНИК (.trash)
+        const trashElement = event.target.closest('.trash');
+        if (trashElement) {
+            event.preventDefault();
+
+            // Шукаємо батьківський div, який містить у собі блок з класом .IPD (або просто підіймаємося до того div, де є клас піци)
+            let parentDiv = trashElement.closest('div');
+            while (parentDiv && !parentDiv.querySelector('.IPD') && !parentDiv.classList.contains('pizzadiv')) {
+                parentDiv = parentDiv.parentElement.closest('div');
+            }
+
+            if (!parentDiv) {
+                // Запасний варіант, якщо структура трохи відрізняється
+                parentDiv = trashElement.closest('.pizzadiv') || trashElement.closest('div');
+            }
+
+            // Шукаємо серед класів цього правильного div клас піци (що починається на pizzadiv)
+            let baseClass = null;
+            if (parentDiv) {
+                for (let cls of parentDiv.classList) {
+                    if (cls.startsWith('pizzadiv') && cls !== 'pizzadiv' && !cls.endsWith('2')) {
+                        baseClass = cls;
+                        break;
+                    }
+                }
+            }
+
+            if (baseClass) {
+                const secondClass = baseClass + '2';
+
+                // Видаляємо цей клас зі збережених у localStorage
+                let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+                savedClasses = savedClasses.filter(c => c !== baseClass && c !== secondClass);
+                localStorage.setItem('activeBuskerClasses', JSON.stringify(savedClasses));
+
+                // Зворотна дія:
+                document.querySelectorAll('.' + baseClass).forEach(el => {
+                    el.style.setProperty('display', 'none', 'important');
+                });
+
+                document.querySelectorAll('.' + secondClass).forEach(el => {
+                    el.style.setProperty('display', 'flex', 'important');
+                    el.style.setProperty('text-decoration', 'none', 'important');
+                });
+            }
+            return;
+        }
+
+        // 2. ПОСИЛАННЯ <a>
+        const targetLink = event.target.closest('a');
+        if (!targetLink) return;
+
+        const classList = targetLink.classList;
+        if (classList.length < 2) return;
+
+        const secondClass = classList[1]; 
+
+        let savedClasses = JSON.parse(localStorage.getItem('activeBuskerClasses')) || [];
+
+        if (!savedClasses.includes(secondClass)) {
+            savedClasses.push(secondClass);
+            localStorage.setItem('activeBuskerClasses', JSON.stringify(savedClasses));
+        }
+
+        applyAllSavedStyles();
+
+        const href = targetLink.getAttribute('href');
+        if (href && href !== '#' && !href.startsWith('javascript:')) {
+            event.preventDefault();
+            setTimeout(function() {
+                window.location.href = href;
+            }, 50);
+        }
+    });
+</script>
+
     </body>
 </html>
