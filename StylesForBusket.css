@@ -3,6 +3,31 @@ body {
     background-color: #FFD800;
 }
 
+.NNNNN {
+    top: 100px;
+    position: fixed;
+    transition: 0.2s;
+    text-decoration: none;
+    color: #FFF9D6;
+    font-size: 36.5px;
+    border: 2px solid #FFF9D6;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #FFD800;
+    margin-bottom: 100px;
+}
+
+.NNNNN:hover {
+    text-decoration: none;
+    color: #FFF9D6;
+    font-size: 44px;
+    border: 1px solid #FFF9D6;
+    border-radius: 15px;
+    padding: 5px;
+    background-color: #FFD800;
+    margin-bottom: 100px;
+}
+
 button {
     text-decoration: none;
     border: none;

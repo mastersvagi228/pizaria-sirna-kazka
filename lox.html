@@ -1,33 +1,85 @@
 <html>
     <body>
        <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="orderstyle.css">
         <title>піцерія сирна казка</title>
         </head>
-        <h1> оброблення замовлення</h1>
-        <section class="MINUSTHREE">
-        <p class="dani">імя користувача:</p>
-        <form>
-            <input type="text"
-            placeholder="введіть імя отримувача"></placeholder>
-        </form>
-        <p class="dani">номер телефону:</p>
-        <form>
-            <input type="tel"
-            placeholder="введіть номер телефону"></placeholder>
-        </form>
-        <p class="dani">дані банківської карти:</p>
-        <form>
-            <input type="number"
-            placeholder="введіть номер банківської карти"></placeholder>
-        </form>
-        <form>
-            <input type="text"
-            placeholder="термін дії"></placeholder>
-            <input type="number"
-            placeholder="CVV"></placeholder>
-        </form>
-        <a class="PDF" href="TOO.html">завершити замовлення</a>
-        </section>
+        <h1> оформлення замовлення</h1>
+         <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form action="/action_page.php">
+      
+              <div class="row">
+                <div class="col-50" id="fifty">
+                  <h3>адреса</h3>
+                  <label for="fname"><i class="fa fa-user"></i> повне ім'я</label>
+                  <input type="text" id="fname" name="firstname" placeholder="ПІБ">
+                  <label for="email"><i class="fa fa-envelope"></i> почта</label>
+                  <input type="text" id="email" name="email" placeholder="john@example.com">
+                  <label for="adr"><i class="fa fa-address-card-o"></i> адрес</label>
+                  <input type="text" id="adr" name="address" placeholder="адрес">
+                  <label for="city"><i class="fa fa-institution"></i> місто</label>
+                  <input type="text" id="city" name="city" placeholder="Київ">
+      
+                  <div class="row">
+                    <div class="col-50">
+                    </div>
+                    <div class="col-50">
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="col-50" id="fifty">
+                  <h3>оплата</h3>
+                  <label for="fname">можливі картки</label>
+                  <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                  </div>
+                  <label for="cname">ім'я власника картки</label>
+                  <input type="text" id="cname" name="cardname" placeholder="ПІБ">
+                  <label for="ccnum">номер картки</label>
+                  <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                  <label for="expmonth">місяць закінчення терміну</label>
+                  <input type="text" id="expmonth" name="expmonth" placeholder="вересень">
+      
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">рік закінчення терміну</label>
+                      <input type="text" id="expyear" name="expyear" placeholder="2028">
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">CVV</label>
+                      <input type="text" id="cvv" name="cvv" placeholder="777">
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+              <a class="NNNN pizzadivzirobas2" href="verylox.html"><b>оплатити</b></a>
+            </form>
+          </div>
+        </div>
+      
+        <div class="col-25">
+          <div class="container">
+            <h4>кошик
+              <span class="price">
+                <i class="fa fa-shopping-cart"></i>
+                <b>3</b>
+              </span>
+            </h4>
+            <p>піца козак<span class="price">379 грн</span></p>
+            <p>нагетси<span class="price">219 грн</span></p>
+            <p>картопля фрі<span class="price">129 грн</span></p>
+            <hr>
+            <p>всього:<span class="price" style="color:black"><b>727 грн</b></span></p>
+          </div>
+        </div>
+      </div>
     </body>
 </html>
